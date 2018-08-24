@@ -16,6 +16,12 @@ public class AulaPraticaPadraoStrategy {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Personagens p=new Personagem1();
+        p.test();
+        p=new Personagem2();
+        p.test();
+        p=new Personagem3();
+        p.test();
     }
     
 }
