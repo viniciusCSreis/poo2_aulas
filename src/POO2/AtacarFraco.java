@@ -10,9 +10,13 @@ package POO2;
  * @author vinic
  */
 public class AtacarFraco implements Atacar{
-    
+     int multiplicador = 2;
     @Override
-    public void atacar(Personagens p) {
-       p.removerLife(1);
+    public void atacar(Personagens p, int dano) {
+        if(Math.random() < 0.5)
+        {
+            dano *=multiplicador;
+        }
+       p.removerLife(dano);
     }
 }

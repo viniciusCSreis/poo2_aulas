@@ -11,8 +11,8 @@ package POO2;
  */
 public class Inimigo1 extends Inimigos{
 
-    public Inimigo1(int x , int y) {
-        super(x,y);
+    public Inimigo1(int x , int y,Armas arma) {
+        super(x,y,arma);
         setPular(new PuloMedio());
         setCorrer(new CorrerMedio());
         setAtacar(new AtacarForte());

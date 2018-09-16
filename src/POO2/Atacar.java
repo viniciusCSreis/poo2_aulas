@@ -10,5 +10,5 @@ package POO2;
  * @author vinic
  */
 public interface Atacar {
-    public void atacar(Personagens p);
+    public void atacar(Personagens p, int dano);
 }

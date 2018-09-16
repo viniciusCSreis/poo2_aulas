@@ -16,11 +16,23 @@ public abstract class Personagens {
     private int x;
     private int y;
     private int life;
+    private Armas arma;
 
-    public Personagens(int x , int y)
+    public Armas getArma() {
+        return arma;
+    }
+
+    public void setArma(Armas arma) {
+        this.arma = arma;
+    }
+    
+    
+    
+    public Personagens(int x , int y , Armas arma )
     {
         this.x = x;
         this.y = y;
+        this.arma= arma;
     }
     
     public void setLife(int life)
@@ -66,7 +78,8 @@ public abstract class Personagens {
     
     public void atacar(Personagens p)
     {
-        atacar.atacar(p);
+        int dano = this.arma.getDano();
+        atacar.atacar(p,dano);
     }
     
     public void pular()

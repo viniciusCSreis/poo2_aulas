@@ -10,8 +10,8 @@ package POO2;
  * @author vinic
  */
 public class Inimigo3 extends Inimigos{
-     public Inimigo3(int x , int y) {
-        super(x,y);
+     public Inimigo3(int x , int y,Armas arma) {
+        super(x,y,arma);
         setPular(new PuloBaixo());
         setCorrer(new CorrerRapido());
         setAtacar(new AtacarForte());

@@ -11,27 +11,27 @@ package POO2;
  */
 public abstract class Inimigos extends Personagens implements IObserver{
 
-    public Inimigos(int x , int y)
+    public Inimigos(int x , int y,Armas arma)
     {
-        super(x,y);
+        super(x,y,arma);
     }
             
     
     @Override
     public void update(Personagens p) {
-        
+        int poder = super.getArma().getPoder();
         //se estiver em distancia de Atacar Personagem
         if(p.getX() == this.getX() && p.getY() == this.getY())
         {
             System.out.println("Inimigo Ataca :"+p);
             super.atacar(p);
             if (Math.random() < 0.5){
-                p.setX(p.getX()+5);
-                p.setY(p.getY()-5);
+                p.setX(p.getX()+ poder);
+                p.setY(p.getY()- poder);
             }
             else {
-                p.setX(p.getX()-5);
-                p.setY(p.getY()+5);
+                p.setX(p.getX()- poder);
+                p.setY(p.getY()+ poder);
             }
         }
         //se precisar andar em direcao ao Personagem

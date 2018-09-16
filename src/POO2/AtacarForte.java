@@ -10,9 +10,15 @@ package POO2;
  * @author vinic
  */
 public class AtacarForte implements Atacar{
-
+    
+    int multiplicador = 5;
+    
     @Override
-    public void atacar(Personagens p) {
-       p.removerLife(3);
+    public void atacar(Personagens p, int dano) {
+        if(Math.random() < 0.5)
+        {
+            dano *=multiplicador;
+        }
+       p.removerLife(dano);
     }
 }

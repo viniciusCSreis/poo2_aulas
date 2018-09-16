@@ -16,11 +16,11 @@ public class PersonagemPrincipal extends Personagens implements ISubject{
     ArrayList <IObserver> observers = new ArrayList<IObserver> ();
     
     
-    public PersonagemPrincipal(int x , int y) {
-        super(x,y);
+    public PersonagemPrincipal(int x , int y , Armas arma) {
+        super(x,y,arma);
         setPular(new PuloMedio());
         setCorrer(new CorrerMedio());
-        setAtacar(new AtacarMedio());
+        setAtacar(new AtacarMedio());        
         setLife(100);
     }
 
