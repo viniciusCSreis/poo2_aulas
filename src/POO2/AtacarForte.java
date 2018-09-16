@@ -12,7 +12,7 @@ package POO2;
 public class AtacarForte implements Atacar{
 
     @Override
-    public void atacar() {
-        System.out.println("Atacaque Forte");
+    public void atacar(Personagens p) {
+       p.removerLife(3);
     }
 }

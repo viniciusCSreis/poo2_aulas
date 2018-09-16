@@ -12,7 +12,7 @@ package POO2;
 public class AtacarMedio implements Atacar{
     
     @Override
-    public void atacar() {
-        System.out.println("Atacaque Medio");
+    public void atacar(Personagens p) {
+       p.removerLife(2);
     }
 }

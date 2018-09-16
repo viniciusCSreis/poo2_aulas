@@ -13,7 +13,45 @@ public abstract class Personagens {
     private Atacar atacar;
     private Pular pular;
     private Correr correr;
+    private int x;
+    private int y;
+    private int life;
 
+    public Personagens(int x , int y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+    
+    public void setLife(int life)
+    {
+        this.life = life;
+    }
+
+    public int getLife() {
+        return life;
+    }
+    
+    public void removerLife(int damage)
+    {
+        this.life -= damage;
+    }
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }        
+    
     public void setAtacar(Atacar atacar) {
         this.atacar = atacar;
     }
@@ -26,9 +64,9 @@ public abstract class Personagens {
         this.correr = correr;
     }
     
-    public void atacar()
+    public void atacar(Personagens p)
     {
-        atacar.atacar();
+        atacar.atacar(p);
     }
     
     public void pular()
@@ -39,12 +77,5 @@ public abstract class Personagens {
     public void correr()
     {
         correr.correr();
-    }
-    public void test()
-    {
-        
-        pular();
-        correr();
-        atacar();
     }
 }

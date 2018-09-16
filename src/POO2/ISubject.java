@@ -10,7 +10,7 @@ package POO2;
  * @author vinicius
  */
 public interface ISubject {
-    public void registerObserver();
-    public void removeObserver();
-    public void notifyObserver();
+    public void registerObserver(IObserver observer);
+    public void removeObserver(IObserver observer);
+    public void notifyObservers();
 }

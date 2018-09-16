@@ -9,11 +9,12 @@ package POO2;
  *
  * @author vinic
  */
-public class Personagem2 extends Personagens{
-     public Personagem2() {
-        setPular(new PuloAlto());
+public class Inimigo3 extends Inimigos{
+     public Inimigo3(int x , int y) {
+        super(x,y);
+        setPular(new PuloBaixo());
         setCorrer(new CorrerRapido());
-        setAtacar(new AtacarMedio());
+        setAtacar(new AtacarForte());
     
     }
 }
