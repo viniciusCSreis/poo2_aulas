@@ -9,6 +9,39 @@ package POO2;
  *
  * @author vinic
  */
-public interface Atacar {
-    public void atacar(Personagens p, int dano);
+public abstract class Atacar {
+    
+    private String tipoAtaque;
+    private int multiplicador=1;
+    private float chanceDeAcerto;
+
+    public void setChanceDeAcerto(float chanceDeAcerto) {
+        this.chanceDeAcerto = chanceDeAcerto;
+    }
+
+    public int getMultiplicador() {
+        return multiplicador;
+    }
+    
+    
+    public int atacar(int dano) {
+        if(Math.random() < chanceDeAcerto)
+            return dano*this.multiplicador;
+        else
+            return dano;
+    }
+
+    public void setMultiplicador(int multiplicador) {
+        this.multiplicador = multiplicador;
+    }
+    
+    
+    
+    public String getTipoAtaque() {
+        return tipoAtaque;
+    }
+
+    public void setTipoAtaque(String tipoAtaque) {
+        this.tipoAtaque = tipoAtaque;
+    } 
 }

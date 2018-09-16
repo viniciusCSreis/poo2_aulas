@@ -15,6 +15,7 @@ public class AulaPraticaPadraoStrategy {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws InterruptedException {
+        
         // TODO code application logic here
         Armas espadaLv1 = new Espada();
         System.out.println("espadaLv1 Dano:"+espadaLv1.getDano());
@@ -43,6 +44,11 @@ public class AulaPraticaPadraoStrategy {
         System.out.println("arcoLv4 Poder:"+arcoLv3.getPoder());       
         
         
+        Atacar ataqueEspecialDeFogo = new AtaqueDeFogo();
+        ataqueEspecialDeFogo = new BonusDeAtaque2x(ataqueEspecialDeFogo);
+        
+        Atacar ataqueEspecialDeAr = new AtaqueDeAr();
+        ataqueEspecialDeAr = new BonusDeAtaque3x(ataqueEspecialDeAr);
         
         PersonagemPrincipal pp = new PersonagemPrincipal(0,0,espadaLv1);
         pp.show();
@@ -50,20 +56,35 @@ public class AulaPraticaPadraoStrategy {
         Inimigos i2 = new Inimigo2(20,20,espadaLv2);
         Inimigos i3 = new Inimigo3(5,5,espadaLv3);
         Inimigos i4 = new Inimigo1(10,20,espadaLv4);
+        i4.setAtacar(ataqueEspecialDeAr);
         Inimigos i5 = new Inimigo2(1,5,arcoLv1);
         Inimigos i6 = new Inimigo3(20,10,arcoLv2);
         Inimigos i7 = new Inimigo1(2,15,arcoLv3);
         Inimigos i8 = new Inimigo1(2,15,arcoLv4);
+        i8.setAtacar(ataqueEspecialDeFogo);
         
         pp.registerObserver(i1);
         pp.registerObserver(i2);
         pp.registerObserver(i3);        
-        pp.registerObserver(i4);        
+        pp.registerObserver(i4); 
         pp.registerObserver(i5);        
         pp.registerObserver(i6);        
         pp.registerObserver(i7);     
-        pp.registerObserver(i8);     
+        pp.registerObserver(i8); 
+        Escudos escudoPP = new Escudo_de_Fogo();
+        Escudos escudoAgua = new Escudo_de_Agua();
         
+        escudoPP.setSucessor(escudoAgua);
+        escudoAgua.setSucessor(null);
+
+        
+        pp.setEscudo(escudoPP);
+        
+        System.out.println("Defende Fogo:"+Boolean.toString(pp.getEscudo().defende("Fogo")));
+        System.out.println("Defende Agua:"+Boolean.toString(pp.getEscudo().defende("Agua")));
+        System.out.println("Defende Ar:"+Boolean.toString(pp.getEscudo().defende("Ar")));
+        System.out.println("Defende Terra:"+Boolean.toString(pp.getEscudo().defende("Terra")));
+        System.out.println(pp.getEscudo());
         while(pp.getLife()>0)
         {
             pp.show();

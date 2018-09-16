@@ -17,6 +17,12 @@ public abstract class Personagens {
     private int y;
     private int life;
     private Armas arma;
+    private Escudos escudo;
+
+    public void setEscudo(Escudos escudo) {
+        this.escudo = escudo;
+    }   
+    
 
     public Armas getArma() {
         return arma;
@@ -24,6 +30,10 @@ public abstract class Personagens {
 
     public void setArma(Armas arma) {
         this.arma = arma;
+    }
+
+    public Escudos getEscudo() {
+        return escudo;
     }
     
     
@@ -79,7 +89,14 @@ public abstract class Personagens {
     public void atacar(Personagens p)
     {
         int dano = this.arma.getDano();
-        atacar.atacar(p,dano);
+        System.out.println("Dano:"+dano);
+        int dano_real=atacar.atacar(dano);
+        System.out.println("Dano_Real:"+dano_real);
+        String tipo_ataque = atacar.getTipoAtaque();
+        System.out.println("Tipo_ataque"+tipo_ataque);
+        boolean defendeu=p.getEscudo().defende(tipo_ataque);
+        if(!defendeu)p.removerLife(dano_real);        
+            
     }
     
     public void pular()

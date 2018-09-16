@@ -14,7 +14,7 @@ public class Inimigo3 extends Inimigos{
         super(x,y,arma);
         setPular(new PuloBaixo());
         setCorrer(new CorrerRapido());
-        setAtacar(new AtacarForte());
+        setAtacar(new AtaqueDeFogo());
     
     }
 }

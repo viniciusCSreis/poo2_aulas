@@ -20,7 +20,7 @@ public class PersonagemPrincipal extends Personagens implements ISubject{
         super(x,y,arma);
         setPular(new PuloMedio());
         setCorrer(new CorrerMedio());
-        setAtacar(new AtacarMedio());        
+        setAtacar(new AtaqueDeAr());        
         setLife(100);
     }
 
