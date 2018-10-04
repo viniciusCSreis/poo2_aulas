@@ -22,7 +22,7 @@ public abstract class Inimigos extends Personagens implements IObserver{
     @Override
     public void update(ISubject subject,String tipo) {
         
-        Personagens p = (Personagens)subject;
+        PersonagemPrincipal p = (PersonagemPrincipal)subject;
         
         int distanciaX= p.getX() - this.getX();
         if(distanciaX<0)
@@ -37,7 +37,7 @@ public abstract class Inimigos extends Personagens implements IObserver{
             
   
             
-           if(distanciaX+distanciaY < 50){
+           if(distanciaX < 50 && distanciaY < 50){
                System.out.println("pp ataca:"+this.toString());
                p.atacar(this);
            }

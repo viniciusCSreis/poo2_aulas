@@ -14,13 +14,18 @@ import java.util.ArrayList;
 public class PersonagemPrincipal extends Personagens implements ISubject,IObserver{
 
     ArrayList <IObserver> observers = new ArrayList<IObserver> ();
-    
+    private int mortes = 0;
     public PersonagemPrincipal(int x , int y , Armas arma) {
         super(x,y,arma);
         setPular(new PuloMedio());
         setCorrer(new CorrerMedio());
         setAtacar(new AtaqueDeAr());        
         setLife(100);
+        observers.add(this);
+    }
+
+    public int getMortes() {
+        return mortes;
     }
 
         
@@ -40,7 +45,8 @@ public class PersonagemPrincipal extends Personagens implements ISubject,IObserv
         if(this.observers.size()>0);
         for(IObserver o  : this.observers)
         {
-           o.update(this,tipo);
+            if(o==this)continue;
+            o.update(this,tipo);
         }
     }
 
@@ -49,9 +55,16 @@ public class PersonagemPrincipal extends Personagens implements ISubject,IObserv
         
         for(IObserver o  : this.observers)
         {
-           observer.add(o);
+            Personagens p = (Personagens)o;
+            if(p.isAlife())
+                observer.add(o);
+            else
+            {
+                mortes++;
+            }
+                
         }
-        observer.add(0,this);
+        this.observers=observer;
         return observer;
     }
     

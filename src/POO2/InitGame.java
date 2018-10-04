@@ -8,6 +8,7 @@ package POO2;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -18,16 +19,39 @@ public class InitGame implements IObserver{
     private ArrayList<Armas> armas = new ArrayList<Armas>();
     private ArrayList<Atacar> ataques = new ArrayList<Atacar>();
     private ArrayList<int[]> posicoes = new ArrayList<int[]>();
+    private ArrayList<Escudos> escudos = new ArrayList<Escudos>();
     private PersonagemPrincipal pp;
     private Game game;
+    private MyKeyListener myListener=null;
+    private int inimigosCriados=0;
     public void update(ISubject p, String Tipo)
     {
        int cont = Integer.valueOf(Tipo);
        if(pp.isAlife())
         {
-            if(cont%3000==0)
-                create_inimigos(pp);
+            if(cont%1000==0)
+                create_inimigos(pp,1);
+            if(cont%15000==0)
+            {
+                Escudos escudoPP = null;
+                boolean adicionarEscudo=false;
+                for(Escudos e : this.escudos)
+                {
+                    if(Math.random()>=0.5)
+                    {
+                        if(!adicionarEscudo)
+                            escudoPP=e;
+                        else
+                            escudoPP.setSucessor(e);
+                        adicionarEscudo=true;
+                        
+                    }
+                    
+                }                 
+                if(adicionarEscudo)pp.setEscudo(escudoPP);
+            }
             game.observers=pp.getObservers();
+            game.cont=cont;
             game.repaint();
             
         }
@@ -85,7 +109,7 @@ public class InitGame implements IObserver{
         armas.add(arcoLv3);
         armas.add(arcoLv4);
         
-        return espadaLv4;
+        return espadaLv2;
     }
     public Atacar init_ataques()
     {
@@ -106,25 +130,26 @@ public class InitGame implements IObserver{
         ataques.add(ataqueEspecialDeAr);
         ataques.add(ataqueEspecialDeFogo);
         
-        return ataqueEspecialDeAr;
+        return ataqueFogo;
     }
     public void init_personagemPrincipal(Armas armaPersonagemPrincipal,Atacar ataquePersonagemPrincipal)
     {
         PersonagemPrincipal pp = new PersonagemPrincipal(250,250,armaPersonagemPrincipal);
         pp.setAtacar(ataquePersonagemPrincipal);
-        Escudos escudoPP = new Escudo_de_Fogo();
-        Escudos escudoAgua = new Escudo_de_Agua();
-        escudoPP.setSucessor(escudoAgua);
-        escudoAgua.setSucessor(null);        
-        pp.setEscudo(escudoPP);
-        
-        System.out.println("Defende Fogo:"+Boolean.toString(pp.getEscudo().defende("Fogo")));
-        System.out.println("Defende Agua:"+Boolean.toString(pp.getEscudo().defende("Agua")));
-        System.out.println("Defende Ar:"+Boolean.toString(pp.getEscudo().defende("Ar")));
-        System.out.println("Defende Terra:"+Boolean.toString(pp.getEscudo().defende("Terra")));
-        System.out.println(pp.getEscudo());
-        
         this.pp = pp;
+    }
+    public void init_escudos()
+    {
+        Escudos escudoFogo = new Escudo_de_Fogo();
+        Escudos escudoAgua = new Escudo_de_Agua();
+        Escudos escudoTerra = new Escudo_de_Terra();
+        Escudos escudoAr = new Escudo_de_Ar();
+        
+        this.escudos.add(escudoFogo);
+        this.escudos.add(escudoAgua);
+        this.escudos.add(escudoTerra);
+        this.escudos.add(escudoAr);
+    
     }
     public void init_posicoes()
     {
@@ -162,11 +187,12 @@ public class InitGame implements IObserver{
         posicoes.add(p);
         
     }
-    public void create_inimigos(PersonagemPrincipal pp)
+    public void create_inimigos(PersonagemPrincipal pp,int n)
     {
                
-        for(int i=0;i<8;i++)
+        for(int j=0;j<n;j++)
         {
+            int i = inimigosCriados++;
             int[] p = posicoes.get( i % posicoes.size() );
             int x = p[0];
             int y = p[1];
@@ -185,28 +211,40 @@ public class InitGame implements IObserver{
         
         
     }
-    public void init() throws InterruptedException
+    public void init( JFrame frame )
     {
         Armas armaPersonagemPrincipal=init_armas();
         Atacar ataquePersonagemPrincipal= init_ataques();
+        init_escudos();
         init_personagemPrincipal(armaPersonagemPrincipal,ataquePersonagemPrincipal);
         init_posicoes();
-        create_inimigos(pp);
+        create_inimigos(pp,8);
           
-        JFrame frame = new JFrame("Game POO2");
-        Game game = new Game();
+        game = new Game();
         game.observers=pp.getObservers();
-        frame.add(game);
-        frame.setSize(700, 700);
-        frame.setVisible(true);
-        MyKeyListener myListener = new MyKeyListener();
+        myListener = new MyKeyListener();
         myListener.pp=pp;
+        myListener.game=game;
         KeyListener listener = myListener;
         game.addKeyListener(listener);
-        game.setFocusable(true);        
+        game.setFocusable(true);
         this.game = game;
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         
+        frame.add(game);           
+        frame.setSize(700, 700);      
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+  
+
+        
+       
+        
+              
+        
+        
+    }
+    public JPanel start() throws InterruptedException
+    {
         ContadorDoRelogio relogio = new ContadorDoRelogio();
         relogio.registerObserver(this);
         relogio.registerObserver(myListener);
@@ -214,7 +252,8 @@ public class InitGame implements IObserver{
         
         relogio.relogioLoop();
         
-               
+        return this.game;
+        
         
         
         

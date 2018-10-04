@@ -15,6 +15,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -22,10 +24,29 @@ import java.util.ArrayList;
  * @author vinic
  */
 public class AulaPraticaPadraoStrategy {
-
     public static void main(String[] args) throws InterruptedException {
-        InitGame initGame = new InitGame();
-        initGame.init();
-    }   
-    
+        JFrame frame=new JFrame("Game POO2");
+        BemVindo b = new BemVindo();            
+        frame.add(b);
+        frame.setSize(700, 700);      
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        b.loop();
+        frame.dispose();
+        init();
+    }  
+    public static JPanel init()
+    {
+        JFrame frame=new JFrame("Game POO2");
+        InitGame initgame = new InitGame();
+        initgame.init(frame);
+        JPanel game= null;
+        try {
+            game =  initgame.start();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(BemVindo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return game;
+    }
+
 }
