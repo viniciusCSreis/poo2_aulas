@@ -10,19 +10,29 @@ package POO2;
  * @author vinic
  */
 public abstract class Personagens {
-    private Atacar atacar;
-    private Pular pular;
-    private Correr correr;
-    private int x;
-    private int y;
-    private int life;
-    private Armas arma;
-    private Escudos escudo;
+    private Atacar atacar = null;
+    private Pular pular = null;
+    private Correr correr = null;
+    private int x = 0;
+    private int y = 0;
+    private int life=100;
+    private Armas arma = null;
+    private Escudos escudo = null;
+    private int lifeMinima=0;
 
     public void setEscudo(Escudos escudo) {
         this.escudo = escudo;
     }   
-    
+    public String getAtacarType()
+    {
+        return this.atacar.getTipoAtaque();
+    }
+    public boolean isAlife()
+    {
+        if(this.life > lifeMinima)
+            return true;
+        return false;
+    }
 
     public Armas getArma() {
         return arma;
@@ -88,15 +98,20 @@ public abstract class Personagens {
     
     public void atacar(Personagens p)
     {
+         if(!this.isAlife())
+             return;
         int dano = this.arma.getDano();
         System.out.println("Dano:"+dano);
         int dano_real=atacar.atacar(dano);
         System.out.println("Dano_Real:"+dano_real);
         String tipo_ataque = atacar.getTipoAtaque();
         System.out.println("Tipo_ataque"+tipo_ataque);
-        boolean defendeu=p.getEscudo().defende(tipo_ataque);
-        if(!defendeu)p.removerLife(dano_real);        
-            
+        boolean defendeu=false;
+        if(p.getEscudo()!= null)
+            defendeu=p.getEscudo().defende(tipo_ataque);
+        if(!defendeu)p.removerLife(dano_real);
+
+
     }
     
     public void pular()

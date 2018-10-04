@@ -11,10 +11,9 @@ import java.util.ArrayList;
  *
  * @author vinicius
  */
-public class PersonagemPrincipal extends Personagens implements ISubject{
+public class PersonagemPrincipal extends Personagens implements ISubject,IObserver{
 
     ArrayList <IObserver> observers = new ArrayList<IObserver> ();
-    
     
     public PersonagemPrincipal(int x , int y , Armas arma) {
         super(x,y,arma);
@@ -36,19 +35,30 @@ public class PersonagemPrincipal extends Personagens implements ISubject{
     }
 
     @Override
-    public void notifyObservers() {
-        Personagens p = this;
+    public void notifyObservers(String msg) {
+        String tipo = msg;
+        if(this.observers.size()>0);
         for(IObserver o  : this.observers)
         {
-            
-            o.update(p);
+           o.update(this,tipo);
         }
     }
-    public void show()
-    {
-        this.notifyObservers();
-        System.out.println("Posicao do Personagem Principal: ("+this.getX()+","+this.getY()+")");
-        System.out.println("Life do Personagem Principal: ("+this.getLife()+")");
+
+    public ArrayList<IObserver> getObservers() {
+        ArrayList<IObserver> observer=new ArrayList<IObserver> ();
+        
+        for(IObserver o  : this.observers)
+        {
+           observer.add(o);
+        }
+        observer.add(0,this);
+        return observer;
+    }
+    
+    
+    @Override
+    public void update(ISubject p, String Tipo) {
+        this.notifyObservers(null);
     }
     
 }

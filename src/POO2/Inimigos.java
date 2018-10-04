@@ -5,6 +5,8 @@
  */
 package POO2;
 
+
+
 /**
  *
  * @author vinicius
@@ -18,21 +20,37 @@ public abstract class Inimigos extends Personagens implements IObserver{
             
     
     @Override
-    public void update(Personagens p) {
-        int poder = super.getArma().getPoder();
+    public void update(ISubject subject,String tipo) {
+        
+        Personagens p = (Personagens)subject;
+        
+        int distanciaX= p.getX() - this.getX();
+        if(distanciaX<0)
+            distanciaX*=-1;
+        int distanciaY= p.getY() - this.getY();
+        if(distanciaY<0)
+            distanciaY*=-1;
+        if(!this.isAlife())
+           return;
+        if(tipo != null)
+        {
+            
+  
+            
+           if(distanciaX+distanciaY < 50){
+               System.out.println("pp ataca:"+this.toString());
+               p.atacar(this);
+           }
+        }
+         
+        
+        
         //se estiver em distancia de Atacar Personagem
-        if(p.getX() == this.getX() && p.getY() == this.getY())
+        if(distanciaX <= 20  && distanciaY <= 20 )
         {
             System.out.println("Inimigo Ataca :"+p);
             super.atacar(p);
-            if (Math.random() < 0.5){
-                p.setX(p.getX()+ poder);
-                p.setY(p.getY()- poder);
-            }
-            else {
-                p.setX(p.getX()- poder);
-                p.setY(p.getY()+ poder);
-            }
+           
         }
         //se precisar andar em direcao ao Personagem
         else

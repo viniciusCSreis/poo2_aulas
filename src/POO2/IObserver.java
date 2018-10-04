@@ -11,5 +11,5 @@ package POO2;
  */
 public interface IObserver {
     //Update tem que receber Personagens pq se receber Subject como consegiarmos atacar um Subject ?
-    public void update(Personagens p);
+    public void update(ISubject p,String Tipo);
 }
