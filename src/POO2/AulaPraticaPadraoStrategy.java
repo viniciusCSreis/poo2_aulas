@@ -33,7 +33,10 @@ public class AulaPraticaPadraoStrategy {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         b.loop();
         frame.dispose();
-        init();
+        while(true)
+        {
+            init();
+        }
     }  
     public static JPanel init()
     {
@@ -46,6 +49,7 @@ public class AulaPraticaPadraoStrategy {
         } catch (InterruptedException ex) {
             Logger.getLogger(BemVindo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        frame.dispose();
         return game;
     }
 
