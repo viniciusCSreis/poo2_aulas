@@ -1,0 +1,7 @@
+out/
+dist/
+build/
+.idea/
+.vscode/
+nbproject/
+poo2_aulas.iml

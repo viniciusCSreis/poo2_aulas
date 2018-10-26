@@ -37,7 +37,7 @@ public class BemVindo extends javax.swing.JPanel {
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Bem Vindo ao jogo de POO2 Parte1, nesse jogo você é uma bolinha preta que esta sendo atacadas por varios inimigos esses inimigos são separados por corres:\n -> Vermelhos : ataque de fogo;\n -> Azul : ataque de agua;\n -> Cinza: ataque de ar;\n -> Amarelo / laranka : ataque de terra;\n\nexistem inimigos fortes e fracos porem não é possivel diferenciar.\n\na cada 15 segundos vc tem change de ganhar escudos para se proteger de algum tipo de inimigo você vera uma borda da cor do escudo em volta de seu personagem.\n\nw a s d  ou as setinhas para mover \nespaço para atacar\n");
+        jTextArea1.setText("Bem Vindo 2 teste ao jogo de POO2 Parte1, nesse jogo você é uma bolinha preta que esta sendo atacadas por varios inimigos esses inimigos são separados por corres:\n -> Vermelhos : ataque de fogo;\n -> Azul : ataque de agua;\n -> Cinza: ataque de ar;\n -> Amarelo / laranka : ataque de terra;\n\nexistem inimigos fortes e fracos porem não é possivel diferenciar.\n\na cada 15 segundos vc tem change de ganhar escudos para se proteger de algum tipo de inimigo você vera uma borda da cor do escudo em volta de seu personagem.\n\nw a s d  ou as setinhas para mover \nespaço para atacar\n");
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("Começar");
