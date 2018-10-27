@@ -5,6 +5,12 @@
  */
 package POO2;
 
+import POO2.ChainOfResponsibility.Escudos;
+import POO2.decorator.Armas;
+import POO2.strategies.Atacar;
+import POO2.strategies.Correr;
+import POO2.strategies.Pular;
+
 /**
  *
  * @author vinic
@@ -101,11 +107,8 @@ public abstract class Personagens {
          if(!this.isAlife())
              return;
         int dano = this.arma.getDano();
-        System.out.println("Dano:"+dano);
         int dano_real=atacar.atacar(dano);
-        System.out.println("Dano_Real:"+dano_real);
         String tipo_ataque = atacar.getTipoAtaque();
-        System.out.println("Tipo_ataque"+tipo_ataque);
         boolean defendeu=false;
         if(p.getEscudo()!= null)
             defendeu=p.getEscudo().defende(tipo_ataque);

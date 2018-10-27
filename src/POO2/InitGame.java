@@ -5,6 +5,33 @@
  */
 package POO2;
 
+import POO2.ChainOfResponsibility.Escudos;
+import POO2.ChainOfResponsibility.concreteEscudos.Escudo_de_Agua;
+import POO2.ChainOfResponsibility.concreteEscudos.Escudo_de_Ar;
+import POO2.ChainOfResponsibility.concreteEscudos.Escudo_de_Fogo;
+import POO2.ChainOfResponsibility.concreteEscudos.Escudo_de_Terra;
+import POO2.decorator.Armas;
+import POO2.decorator.concreteComponent.Arco;
+import POO2.decorator.concreteComponent.Espada;
+import POO2.decorator.decorator.concreteDecorator.bonusDeAtaque.BonusDeAtaque2x;
+import POO2.decorator.decorator.concreteDecorator.bonusDeAtaque.BonusDeAtaque3x;
+import POO2.decorator.decorator.concreteDecorator.gemas.GemaDoDano;
+import POO2.decorator.decorator.concreteDecorator.gemas.GemaDoPoder;
+import POO2.decorator.decorator.concreteDecorator.gemas.GemaRara;
+import POO2.factory.InimigosAdvancedFactory;
+import POO2.observer.IObserver;
+import POO2.observer.ISubject;
+import POO2.observer.observers.Inimigos;
+import POO2.observer.subjects.ContadorDoRelogio;
+import POO2.observer.subjects.PersonagemPrincipal;
+import POO2.strategies.Atacar;
+import POO2.strategies.concreteStrategies.atacar.AtaqueDeAgua;
+import POO2.strategies.concreteStrategies.atacar.AtaqueDeAr;
+import POO2.strategies.concreteStrategies.atacar.AtaqueDeFogo;
+import POO2.strategies.concreteStrategies.atacar.AtaqueDeTerra;
+import POO2.view.Game;
+import POO2.view.MyKeyListener;
+
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -14,12 +41,11 @@ import javax.swing.JPanel;
  *
  * @author vinicius
  */
-public class InitGame implements IObserver{
+public class InitGame implements IObserver {
     
-    private ArrayList<Armas> armas = new ArrayList<Armas>();
-    private ArrayList<Atacar> ataques = new ArrayList<Atacar>();
-    private ArrayList<int[]> posicoes = new ArrayList<int[]>();
-    private ArrayList<Escudos> escudos = new ArrayList<Escudos>();
+    private ArrayList<Armas> armas = new ArrayList<>();
+    private ArrayList<Atacar> ataques = new ArrayList<>();
+    private ArrayList<Escudos> escudos = new ArrayList<>();
     private PersonagemPrincipal pp;
     private Game game;
     private MyKeyListener myListener=null;
@@ -68,7 +94,7 @@ public class InitGame implements IObserver{
    
     public Armas init_armas()
     {
-         Armas espadaLv1 = new Espada();        
+         Armas espadaLv1 = new Espada();
         System.out.println("espadaLv1 Dano:"+espadaLv1.getDano());
         System.out.println("espadaLv1 Poder:"+espadaLv1.getPoder());
         
@@ -144,70 +170,27 @@ public class InitGame implements IObserver{
         Escudos escudoAgua = new Escudo_de_Agua();
         Escudos escudoTerra = new Escudo_de_Terra();
         Escudos escudoAr = new Escudo_de_Ar();
-        
+
         this.escudos.add(escudoFogo);
         this.escudos.add(escudoAgua);
         this.escudos.add(escudoTerra);
         this.escudos.add(escudoAr);
-    
+
     }
-    public void init_posicoes()
-    {
-        int[] p = new int[2];
-        p[0]=0;
-        p[1]=0;
-        posicoes.add(p);
-        p = new int[2];
-        p[0]=0;
-        p[1]=350;
-        posicoes.add(p);
-        p = new int[2];
-        p[0]=0;
-        p[1]=700;
-        posicoes.add(p);
-        p = new int[2];
-        p[0]=350;
-        p[1]=0;
-        posicoes.add(p);
-        p = new int[2];
-        p[0]=350;
-        p[1]=700;
-        posicoes.add(p);
-        p = new int[2];
-        p[0]=700;
-        p[1]=0;
-        posicoes.add(p);
-        p = new int[2];
-        p[0]=700;
-        p[1]=350;
-        posicoes.add(p);
-        p = new int[2];
-        p[0]=700;
-        p[1]=700;
-        posicoes.add(p);
-        
-    }
-    public void create_inimigos(PersonagemPrincipal pp,int n)
+    public void create_inimigos(PersonagemPrincipal pp, int n)
     {
                
         for(int j=0;j<n;j++)
         {
             int i = inimigosCriados++;
-            int[] p = posicoes.get( i % posicoes.size() );
-            int x = p[0];
-            int y = p[1];
-            
-            Inimigos inimigo=null;
-            if((i%3)+1==1)inimigo=new Inimigo1(x,y,armas.get( i % armas.size() ));
-            if((i%3)+1==2)inimigo=new Inimigo2(x,y,armas.get( i % armas.size() ));
-            if((i%3)+1==3)inimigo=new Inimigo3(x,y,armas.get( i % armas.size() ));
-            
+
+            Inimigos inimigo = InimigosAdvancedFactory.getInstace().getInimigo();
+
             inimigo.setAtacar(ataques.get(i % ataques.size() ));
             
             pp.registerObserver(inimigo);
              
-            System.out.println("Inimigo x:"+x+" y:"+y);
-        }       
+        }
         
         
     }
@@ -217,7 +200,6 @@ public class InitGame implements IObserver{
         Atacar ataquePersonagemPrincipal= init_ataques();
         init_escudos();
         init_personagemPrincipal(armaPersonagemPrincipal,ataquePersonagemPrincipal);
-        init_posicoes();
         create_inimigos(pp,8);
           
         game = new Game();
