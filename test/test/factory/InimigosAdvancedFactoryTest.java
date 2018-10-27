@@ -6,8 +6,7 @@ import POO2.observer.observers.Inimigos;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class
-InimigosAdvancedFactoryTest {
+class InimigosAdvancedFactoryTest {
     @Test
     public void inimigosFactoryTestReturnInimigo(){
         assertTrue( Inimigos1Factory.getInstace().getInimigo() instanceof Inimigos);
