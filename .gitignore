@@ -4,5 +4,5 @@ build/
 .idea/
 .vscode/
 .git/
-nbproject/
 poo2_aulas.iml
+/nbproject/private/

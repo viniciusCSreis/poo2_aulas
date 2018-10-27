@@ -2,13 +2,12 @@ package test.factory;
 
 import POO2.decorator.concreteComponent.Espada;
 import POO2.factory.Inimigos1Factory;
-import POO2.observer.observers.Inimigo1;
 import POO2.observer.observers.Inimigos;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-class InimigosAdvancedFactoryTest {
+class
+InimigosAdvancedFactoryTest {
     @Test
     public void inimigosFactoryTestReturnInimigo(){
         assertTrue( Inimigos1Factory.getInstace().getInimigo() instanceof Inimigos);
