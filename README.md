@@ -10,4 +10,4 @@ $ mvn clean install
 $ java -jar target/poo2Aulas-1.0-SNAPSHOT.jar 
 
 ```
-Caso preferir você pode abrir o projeto no netbeans e execultar normalmente como um projeto maven.
+Caso preferir você pode abrir o projeto em qualquer IDE e execultar normalmente como um projeto maven.
