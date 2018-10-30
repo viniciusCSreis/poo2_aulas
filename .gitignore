@@ -1,8 +1,5 @@
-out/
-dist/
-build/
 .idea/
 .vscode/
 .git/
-poo2_aulas.iml
-/nbproject/private/
+poo2Aulas.iml
+target/
