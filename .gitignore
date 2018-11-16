@@ -5,3 +5,4 @@ target/
 poo2Aulas.iml
 out/
 .gradle/
+build/
