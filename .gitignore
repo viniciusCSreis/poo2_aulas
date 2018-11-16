@@ -1,5 +1,7 @@
 .idea/
 .vscode/
 .git/
-poo2Aulas.iml
 target/
+poo2Aulas.iml
+out/
+.gradle/
