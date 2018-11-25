@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author vinic
  */
-public class Main {
+public class  Main {
     public static void main(String[] args) throws InterruptedException {
         JFrame frame=new JFrame("Game POO2");
         BemVindo b = new BemVindo();
