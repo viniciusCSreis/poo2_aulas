@@ -5,9 +5,7 @@
  */
 package br.ufu.poo2.view;
 
-import br.ufu.poo2.observer.IObserver;
-import br.ufu.poo2.observer.ISubject;
-import br.ufu.poo2.observer.subjects.PersonagemPrincipal;
+import br.ufu.poo2.command.*;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -16,78 +14,69 @@ import java.awt.event.KeyListener;
  *
  * @author vinicius
  */
-public class MyKeyListener implements KeyListener, IObserver {
-    
-        public PersonagemPrincipal pp;
-        public Game game;
-        int contRelogio=0;
-        int contUltimoAtaque=0;
-    
-        @Override
-        public void keyTyped(KeyEvent e) {
-        }
+public class MyKeyListener implements KeyListener {
 
-        @Override
-        public void keyPressed(KeyEvent e) {
-            
-            if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A)  
-            {
-                pp.setX(pp.getX()-10);
-                if(pp.getX()>700)
-                    pp.setX(700);
-                if(pp.getX()<0)
-                    pp.setX(0);
-            }
-               
-            if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D)
-            {
-                pp.setX(pp.getX()+10);
-                if(pp.getX()>700)
-                    pp.setX(700);
-                if(pp.getX()<0)
-                    pp.setX(0);
-            }
-               
-            if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W)
-            {
-                pp.setY(pp.getY()-10);
-                if(pp.getY()>700)
-                    pp.setY(700);
-                if(pp.getY()<0)
-                    pp.setY(0);
-            }
-            
-            if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S)
-            {
-                pp.setY(pp.getY()+10);
-                if(pp.getY()>700)
-                    pp.setY(700);
-                if(pp.getY()<0)
-                    pp.setY(0);
-            }
-               
-            if (e.getKeyCode() == KeyEvent.VK_SPACE)  
-            {
-                if(contRelogio-contUltimoAtaque > 250)
-                {
-                    this.contUltimoAtaque=this.contRelogio;
-                    pp.notifyObservers("ataque");
-                    game.estamina=0;
-                }
-            }          
-               
-        }
+    Controle controle;
 
-        @Override
-        public void keyReleased(KeyEvent e) {
-        }
-        public void setPP(PersonagemPrincipal pp)
-        {
-            this.pp=pp;
-        }
+    public void setControle(Controle controle) {
+        this.controle = controle;
+    }
 
     @Override
-    public void update(ISubject p, String Tipo) {
-        this.contRelogio= Integer.valueOf(Tipo);    
+    public void keyTyped(KeyEvent e) {
     }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+        if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_NUMPAD4)
+        {
+            controle.pressionar(0);
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_NUMPAD6)
+        {
+            controle.pressionar(1);
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_NUMPAD8)
+        {
+            controle.pressionar(2);
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_NUMPAD2)
+        {
+            controle.pressionar(3);
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_NUMPAD5 )
+        {
+            controle.pressionar(4);
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_NUMPAD7)
+        {
+            controle.pressionar(5);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_NUMPAD9)
+        {
+            controle.pressionar(6);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_NUMPAD1)
+        {
+            controle.pressionar(7);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_NUMPAD3)
+        {
+            controle.pressionar(8);
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+
+    }
+
+
 }

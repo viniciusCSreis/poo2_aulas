@@ -10,6 +10,8 @@ import br.ufu.poo2.ChainOfResponsibility.concreteEscudos.Escudo_de_Agua;
 import br.ufu.poo2.ChainOfResponsibility.concreteEscudos.Escudo_de_Ar;
 import br.ufu.poo2.ChainOfResponsibility.concreteEscudos.Escudo_de_Fogo;
 import br.ufu.poo2.ChainOfResponsibility.concreteEscudos.Escudo_de_Terra;
+import br.ufu.poo2.command.Attack;
+import br.ufu.poo2.command.Controle;
 import br.ufu.poo2.decorator.Armas;
 import br.ufu.poo2.decorator.concreteComponent.Arco;
 import br.ufu.poo2.decorator.concreteComponent.Espada;
@@ -19,6 +21,7 @@ import br.ufu.poo2.decorator.decorator.concreteDecorator.gemas.GemaDoDano;
 import br.ufu.poo2.decorator.decorator.concreteDecorator.gemas.GemaDoPoder;
 import br.ufu.poo2.decorator.decorator.concreteDecorator.gemas.GemaRara;
 import br.ufu.poo2.factory.InimigosAdvancedFactory;
+import br.ufu.poo2.factory.SimpleControleFactory;
 import br.ufu.poo2.observer.IObserver;
 import br.ufu.poo2.observer.ISubject;
 import br.ufu.poo2.observer.observers.Inimigos;
@@ -48,6 +51,7 @@ public class InitGame implements IObserver {
     private ArrayList<Escudos> escudos = new ArrayList<>();
     private PersonagemPrincipal pp;
     private Game game;
+    private Controle controle;
     private MyKeyListener myListener=null;
     private int inimigosCriados=0;
     public void update(ISubject p, String Tipo)
@@ -204,9 +208,9 @@ public class InitGame implements IObserver {
           
         game = new Game();
         game.observers=pp.getObservers();
+        controle = SimpleControleFactory.getInstance(pp,game);
         myListener = new MyKeyListener();
-        myListener.pp=pp;
-        myListener.game=game;
+        myListener.setControle(controle);
         KeyListener listener = myListener;
         game.addKeyListener(listener);
         game.setFocusable(true);
@@ -229,7 +233,7 @@ public class InitGame implements IObserver {
     {
         ContadorDoRelogio relogio = new ContadorDoRelogio();
         relogio.registerObserver(this);
-        relogio.registerObserver(myListener);
+        relogio.registerObserver((Attack)controle.getCommands()[4]);
         relogio.registerObserver(pp);
         
         relogio.relogioLoop();
