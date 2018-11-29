@@ -28,7 +28,7 @@ public class PersonagemPrincipal extends Personagens implements ISubject,IObserv
         setPular(new PuloMedio());
         setCorrer(new CorrerMedio());
         setAtacar(new AtaqueDeAr());
-        setLife(100);
+        setLife(69);
         observers.add(this);
     }
 

@@ -20,6 +20,5 @@ public class Inimigo2 extends Inimigos {
         setPular(new PuloAlto());
         setCorrer(new CorrerRapido());
         setAtacar(new AtaqueDeAr());
-    
     }
 }

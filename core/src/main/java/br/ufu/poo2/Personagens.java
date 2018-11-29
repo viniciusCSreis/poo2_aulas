@@ -7,6 +7,8 @@ package br.ufu.poo2;
 
 import br.ufu.poo2.ChainOfResponsibility.Escudos;
 import br.ufu.poo2.decorator.Armas;
+import br.ufu.poo2.state.Normal;
+import br.ufu.poo2.state.PersonagemState;
 import br.ufu.poo2.strategies.Atacar;
 import br.ufu.poo2.strategies.Correr;
 import br.ufu.poo2.strategies.Pular;
@@ -17,6 +19,7 @@ import br.ufu.poo2.strategies.Pular;
  */
 public abstract class Personagens {
     private Atacar atacar = null;
+    private PersonagemState personagemState;
     private Pular pular = null;
     private Correr correr = null;
     private int x = 0;
@@ -25,6 +28,23 @@ public abstract class Personagens {
     private Armas arma = null;
     private Escudos escudo = null;
     private int lifeMinima=0;
+    private String img;
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public PersonagemState getPersonagemState() {
+        return personagemState;
+    }
+
+    public void setPersonagemState(PersonagemState personagemState) {
+        this.personagemState = personagemState;
+    }
 
     public void setEscudo(Escudos escudo) {
         this.escudo = escudo;
@@ -59,11 +79,13 @@ public abstract class Personagens {
         this.x = x;
         this.y = y;
         this.arma= arma;
+        this.personagemState=new Normal(this);
     }
     
     public void setLife(int life)
     {
         this.life = life;
+        this.personagemState.verificarAlteracaoEstado();
     }
 
     public int getLife() {
@@ -73,6 +95,7 @@ public abstract class Personagens {
     public void removerLife(int damage)
     {
         this.life -= damage;
+        this.personagemState.verificarAlteracaoEstado();
     }
     public int getX() {
         return x;

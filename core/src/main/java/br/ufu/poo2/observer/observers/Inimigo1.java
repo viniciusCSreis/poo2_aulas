@@ -22,5 +22,7 @@ public class Inimigo1 extends Inimigos {
         setCorrer(new CorrerMedio());
         setAtacar(new AtaqueDeFogo());
     }
-    
+
+
+
 }

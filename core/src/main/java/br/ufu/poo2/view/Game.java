@@ -12,6 +12,7 @@ package br.ufu.poo2.view;
 import br.ufu.poo2.observer.subjects.PersonagemPrincipal;
 import br.ufu.poo2.Personagens;
 import br.ufu.poo2.observer.IObserver;
+import br.ufu.poo2.state.Normal;
 
 import java.awt.Color;
 import java.awt.FontMetrics;
@@ -80,6 +81,12 @@ public class Game extends JPanel{
                            g2d.fillOval(centerX-(ovalWidth-escudoSize*escudos)/2, centerY-(ovalHeight-escudoSize*escudos)/2,ovalWidth-escudoSize*escudos,ovalHeight-escudoSize*escudos);
                            escudos++; 
                         }
+                        if(j.getPersonagemState() instanceof Normal){
+                            g2d.setColor(Color.PINK);
+                            g2d.fillOval(centerX-(ovalWidth-escudoSize*escudos)/2, centerY-(ovalHeight-escudoSize*escudos)/2,ovalWidth-escudoSize*escudos,ovalHeight-escudoSize*escudos);
+                            escudos++;
+                        }
+
                 }
                 // Draw oval
                 if(i == 0)g2d.setColor(Color.BLACK);
